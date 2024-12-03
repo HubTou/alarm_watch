@@ -1,0 +1,29 @@
+[HUD instruments]
+
+# Whether or not to show the watch 
+show_watch (Watch) bool true
+
+# Whether or not to show the GPS
+show_gps (GPS) bool true
+
+# Whether or not to show the altimeter
+show_altimeter (Altimeter) bool true
+
+# Whether or not to show the compass
+show_compass (Compass) bool true
+
+[Instruments configuration]
+
+# Display the time in 12 or 24 hours
+watch_display (Time format) enum 24h 24h,12h
+
+# Display the chronometer results in game time or real time
+chrono_display (Chronometer time) enum game_time game_time,real_time
+
+# Display the GPS location in geographical or Cartesian coordinates
+gps_display (GPS coordinates) enum geographical geographical,cartesian
+
+[Pre-set alarms]
+
+# Whether or not to use the light sensor to raise an alarm at sunrise and sunset
+use_light_sensor (At sunrise and sunset) bool true
