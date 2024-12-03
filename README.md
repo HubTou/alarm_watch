@@ -5,12 +5,12 @@ A [Luanti](https://www.luanti.org/) client-side mod implementing a [vintage alar
 * Watch
   * displays the time in 12 or 24h format
 * Programmable alarm
-  * with vintage ring sound and custom message
+  * with [vintage ring](https://pixabay.com/sound-effects/alarm-beep-electronic-91914/) sound and custom message
 * Chronometer
   * in game time or real world time
 * Light sensor
-  * with message and crowing rooster sound at sunrise
-  * with message and hooting owl at sunset 
+  * with message and [crowing rooster](https://pixabay.com/sound-effects/rooster-233738/) sound at sunrise (05:45)
+  * with message and [hooting owl](https://pixabay.com/sound-effects/owl-hooting-left-to-right-stereo-240676/) sound at sunset (19:30)
 * GPS
   * displays location in geographical (latitude/longitude) or Cartesian coordinates (x/z)
 * Altimeter
@@ -66,14 +66,23 @@ To enable/disable the backlit lighting:
 .alarm_light
 ```
 
+Get command help ingame with:
+```
+.help
+```
+
 ## Caveats
 There are still a few issues with this mod:
 * Despite providing translations, they are unused (I believe client-side mods don't use translations at all),
 * The chronometer results will be incorrect if players go to bed for sleeping, or if time is changed by an admin,
-* local chat commands are uselessly echoed by the game.
+* [local chat commands are uselessly echoed by the game](https://forum.luanti.org/viewtopic.php?t=31183).
 
 ## Credits
+### Debugging
+* [Compass debugging](https://forum.luanti.org/viewtopic.php?t=31167) by [Blockhead](https://forum.luanti.org/memberlist.php?mode=viewprofile&u=24958)
+
 ### Music credits:
-* [alarm beep electronic](https://pixabay.com/sound-effects/alarm-beep-electronic-91914/) by freesound_community
-* [Rooster](https://pixabay.com/sound-effects/rooster-233738/) by Stefan_Grace
-* [Owlhooting left to right](https://pixabay.com/sound-effects/owl-hooting-left-to-right-stereo-240676/) by TanwerAman
+I have bundled these "Free for use" sounds from [Pixabay](https://pixabay.com/):
+* [alarm beep electronic](https://pixabay.com/sound-effects/alarm-beep-electronic-91914/) by reecord2 of [freesound_community](https://pixabay.com/users/freesound_community-46691455/)
+* [Rooster](https://pixabay.com/sound-effects/rooster-233738/) by [Stefan_Grace](https://pixabay.com/users/stefan_grace-8153913/)
+* [Owlhooting left to right](https://pixabay.com/sound-effects/owl-hooting-left-to-right-stereo-240676/) by [TanwerAman](https://pixabay.com/users/tanweraman-29554143/)
