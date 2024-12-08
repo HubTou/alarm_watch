@@ -17,8 +17,8 @@ Examples of Head-Up Display, showing watch, GPS, altimeter and compass instrumen
   * with message and [crowing rooster](https://pixabay.com/sound-effects/rooster-233738/) sound at sunrise (05:45)
   * with message and [hooting owl](https://pixabay.com/sound-effects/owl-hooting-left-to-right-stereo-240676/) sound at sunset (19:30)
 * GPS
-  * displays location in [geographical](https://en.wikipedia.org/wiki/Geographic_coordinate_system) (latitude/longitude) or Cartesian coordinates (x/z)
-* Altimeter (though the geographical system has been losing momentum now we know that the world is flat and not spherical!),  
+  * displays location in [geographical](https://en.wikipedia.org/wiki/Geographic_coordinate_system) (latitude/longitude) or Cartesian coordinates (x/z), though the geographical system has been losing momentum since we discovered that the world is flat and not spherical!
+* Altimeter  
   * y-coordinate (for ores and jewels mining) 
 * Compass
   * with cardinal direction faced and angle in degrees
