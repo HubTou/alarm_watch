@@ -18,7 +18,7 @@ Examples of Head-Up Display, showing watch, GPS, altimeter and compass instrumen
   * with message and [hooting owl](https://pixabay.com/sound-effects/owl-hooting-left-to-right-stereo-240676/) sound at sunset (19:30)
 * GPS
   * displays location in [geographical](https://en.wikipedia.org/wiki/Geographic_coordinate_system) (latitude/longitude) or Cartesian coordinates (x/z)
-* Altimeter
+* Altimeter (though the geographical system has been losing momentum now we know that the world is flat and not spherical!),  
   * y-coordinate (for ores and jewels mining) 
 * Compass
   * with cardinal direction faced and angle in degrees
@@ -115,7 +115,7 @@ There are still a few issues with this mod:
 ### Debugging
 * [Compass debugging](https://forum.luanti.org/viewtopic.php?t=31167) by [Blockhead](https://forum.luanti.org/memberlist.php?mode=viewprofile&u=24958)
 
-### Music credits:
+### Music credits
 I have bundled these "Free for use" sounds from [Pixabay](https://pixabay.com/):
 * [alarm beep electronic](https://pixabay.com/sound-effects/alarm-beep-electronic-91914/) by reecord2 of [freesound_community](https://pixabay.com/users/freesound_community-46691455/)
 * [Rooster](https://pixabay.com/sound-effects/rooster-233738/) by [Stefan_Grace](https://pixabay.com/users/stefan_grace-8153913/)

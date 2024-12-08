@@ -54,20 +54,26 @@ core.register_on_mods_loaded(function()
 	end
 end)
 
--- Wait 1 second for localplayer to be initialized
-core.after(1, function()
-	-- Create a HUD displaying (if enabled) watch, GPS, altimeter and compass
-	-- See documentation on https://api.minetest.net/hud/
-	hud = core.localplayer:hud_add({
-		name = "Alarm watch",
-		type = "text",
-		position = {x=0, y=1},
-		offset = {x=8, y=-8},
-		number = colorspec_to_number("red"),
-		alignment = {x=1, y=-1},
-		text = ""
-	})
-end)
+-- Initialize the Head-UP display
+-- with 1 attempt per second during the first 10 seconds after connection
+-- as core.localplayer is not immediately initialized...
+for i=1,10 do
+	core.after(i, function()
+		-- Create a HUD displaying (if enabled) watch, GPS, altimeter and compass
+		-- See documentation on https://api.minetest.net/hud/
+		if not hud and core.localplayer then
+			hud = core.localplayer:hud_add({
+				name = "Alarm watch",
+				type = "text",
+				position = {x=0, y=1},
+				offset = {x=8, y=-8},
+				number = colorspec_to_number("red"),
+				alignment = {x=1, y=-1},
+				text = ""
+			})
+		end
+	end)
+end
 
 core.register_globalstep(function(dtime)
 	-- Regularly change the watch, GPS, altimeter and compass display. And raise alarms
@@ -124,64 +130,70 @@ core.register_globalstep(function(dtime)
 		-- The following is needed to do things only once as the globalstep function is called several times per minute
 		last_minute = minute
 	end
-	
-	if config.show_gps then
-		local pos = core.localplayer:get_pos()
 
-		if config.gps_display == "geographical" then
-			if pos.z < 0 then
-				gps_text = string.format("%.0f°%s, ", pos.z * -1, S("N"))
-			else
-				gps_text = string.format("%.0f°%s, ", pos.z, S("S"))
+	if core.localplayer then
+		if config.show_gps then
+			local pos = core.localplayer:get_pos()
+
+			if config.gps_display == "geographical" then
+				if pos.z < 0 then
+					gps_text = string.format("%.0f°%s, ", pos.z * -1, S("N"))
+				else
+					gps_text = string.format("%.0f°%s, ", pos.z, S("S"))
+				end
+				if pos.x < 0 then
+					gps_text = gps_text .. string.format("%.0f°%s", pos.x * -1, S("W"))
+				else
+					gps_text = gps_text .. string.format("%.0f°%s", pos.x, S("E"))
+				end
+			else -- config.gps_display == "cartesian"
+				gps_text = string.format("x = %.0f / z = %.0f", pos.x, pos.z)
 			end
-			if pos.x < 0 then
-				gps_text = gps_text .. string.format("%.0f°%s", pos.x * -1, S("W"))
+		end
+
+		if config.show_altimeter then
+			local pos = core.localplayer:get_pos()
+
+			altimeter_text = string.format("y = %.0f", pos.y)
+		end
+
+		if config.show_compass then
+			-- With the help and eagle eye of Blockhead
+			-- See https://forum.luanti.org/viewtopic.php?p=440916#p440916
+			local radians = core.localplayer:get_last_look_horizontal()
+			radians = radians % (2 * math.pi)
+			local degrees = math.deg(radians)
+			local angle = nil
+			if degrees <= 90 then
+				angle = 90 - degrees
 			else
-				gps_text = gps_text .. string.format("%.0f°%s", pos.x, S("E"))
+				angle = 450 - degrees -- 450 = 360 + 90
 			end
-		else -- config.gps_display == "cartesian"
-			gps_text = string.format("x = %.0f / z = %.0f", pos.x, pos.z)
+
+			-- Unfortunately arrow characters are not supported in the font used in the game...
+			if angle > 22.5 and angle <= 67.5 then
+				compass_text = S("North-East")
+			elseif angle > 67.5 and angle <= 112.5 then
+				compass_text = S("East")
+			elseif angle > 112.5 and angle <= 157.5 then
+				compass_text = S("South-East")
+			elseif angle > 157.5 and angle <= 202.5 then
+				compass_text = S("South")
+			elseif angle > 202.5 and angle <= 247.5 then
+				compass_text = S("South-West")
+			elseif angle > 247.5 and angle <= 292.5 then
+				compass_text = S("West")
+			elseif angle > 292.5 and angle <= 337.5 then
+				compass_text = S("North-West")
+			else
+				compass_text = S("North")
+			end
+			compass_text = string.format("%s (%.0f°)", compass_text, angle)
 		end
-	end
-
-	if config.show_altimeter then
-		local pos = core.localplayer:get_pos()
-
-		altimeter_text = string.format("y = %.0f", pos.y)
-	end
-
-	if config.show_compass then
-		-- With the help and eagle eye of Blockhead
-		-- See https://forum.luanti.org/viewtopic.php?p=440916#p440916
-		local radians = core.localplayer:get_last_look_horizontal()
-		radians = radians % (2 * math.pi)
-		local degrees = math.deg(radians)
-		local angle = nil
-		if degrees <= 90 then
-			angle = 90 - degrees
-		else
-			angle = 450 - degrees -- 450 = 360 + 90
-		end
-
-		-- Unfortunately arrow characters are not supported in the font used in the game...
-		if angle > 22.5 and angle <= 67.5 then
-			compass_text = S("North-East")
-		elseif angle > 67.5 and angle <= 112.5 then
-			compass_text = S("East")
-		elseif angle > 112.5 and angle <= 157.5 then
-			compass_text = S("South-East")
-		elseif angle > 157.5 and angle <= 202.5 then
-			compass_text = S("South")
-		elseif angle > 202.5 and angle <= 247.5 then
-			compass_text = S("South-West")
-		elseif angle > 247.5 and angle <= 292.5 then
-			compass_text = S("West")
-		elseif angle > 292.5 and angle <= 337.5 then
-			compass_text = S("North-West")
-		else
-			compass_text = S("North")
-		end
-		compass_text = string.format("%s (%.0f°)", compass_text, angle)
+	else
+		gps_text = ""
+		altimeter_text = ""
+		compass_text = ""
 	end
 
 	if hud then
