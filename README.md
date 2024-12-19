@@ -135,7 +135,5 @@ Other possible things that would probably better be kept separated from this mod
 * Music player to be used with music records you carry (with another HUD) 
 * Death tracker:
   * I have another (not yet published) client-side mod for tracking death locations (that could be integrated with the waypoint system), but that I want to keep separated as it's working with a server-side complementary mod.
-* Chat recorder / exporter / translator:
-  * I'm also interested in studying a chat recorder, exporter or translator using local [LibreTranslate](https://github.com/LibreTranslate/LibreTranslate) but it's also probably better to keep that separated because of this heavy dependency...
 
 Go to [Discussions](https://github.com/HubTou/alarm_watch/discussions) if you want to suggest other things...
